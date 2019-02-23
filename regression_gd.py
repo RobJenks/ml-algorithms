@@ -4,7 +4,7 @@ from numpy import random
 from common import plot, mth
 
 
-def linear_regression_gradient_descent():
+def run_linear_regression_gradient_descent():
     data = generate_data(-3.2, -2.76, 100, 48)
     theta, f = gradient_descent(data, 1_000_000)
     print(f"Solution: y = {theta[0]} + {theta[1]}x")
