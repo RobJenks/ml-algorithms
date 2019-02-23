@@ -10,10 +10,6 @@ def plot_line(x: List[float], y: List[float]):
     plt.plot(x, y, lw=2)
 
 
-def plot_trend(xmin, xmax, theta0, theta1):
-    plot_line([xmin, xmax], [theta0 + (theta1 * x) for x in [xmin, xmax]])
-
-
 def plot_linear_fn(fn, xmin, xmax):
     plot_line([xmin, xmax], [fn(xmin), fn(xmax)])
 
