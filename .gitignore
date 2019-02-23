@@ -8,4 +8,5 @@
 */target/**
 
 # Exclude python compiled and cached files
+/__pycache__
 */__pycache__/*
