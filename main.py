@@ -14,9 +14,7 @@ def content():
 
 
 def main():
-    for id, process in content():
-        if id in sys.argv:
-            process()
+    [process() for (key, process) in content() if key in sys.argv]
 
 
 # Entry point
