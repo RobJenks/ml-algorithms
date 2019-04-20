@@ -55,7 +55,7 @@ def perform_kmeans_clustering(data, k):
 
         clusters = new_clusters
 
-    print("WARNING: K-Means clustering did not converge after {} iterations; result may be innacurate".format(MAX_ITERATIONS))
+    print("WARNING: K-Means clustering did not converge after {} iterations; result may be inaccurate".format(MAX_ITERATIONS))
 
 
 def perform_kmeans_iteration(data, centroids):
@@ -81,7 +81,7 @@ MAX_ITERATIONS = 10_000
 
 
 # Visualisation option to show the points changing cluster assignment each iteration
-VISUALISE_CLUSTER_CHANGES = True
+VISUALISE_CLUSTER_CHANGES = False
 
 
 # Vector operations
@@ -90,11 +90,11 @@ def distsq(v0: Tuple, v1: Tuple):
 
 
 def vadd(v0: Tuple, v1: Tuple):
-    return tuple(x + y for (x, y) in zip(v0, v1))
+    return tuple(x0 + x1 for (x0, x1) in zip(v0, v1))
 
 
 def vsub(v0: Tuple, v1: Tuple):
-    return tuple(x - y for (x, y) in zip(v0, v1))
+    return tuple(x0 - x1 for (x0, x1) in zip(v0, v1))
 
 
 def vscale(v: Tuple, s):
