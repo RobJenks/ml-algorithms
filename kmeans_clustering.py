@@ -40,7 +40,7 @@ def perform_kmeans_clustering(data, k):
     clusters = [-1 for _ in range(n)]
 
     # Select random points to act as the initial centroids; perturb to avoid identical points
-    centroids = tuple(data[random.randint(0, n)] + (random.uniform(0.0, 1.0), ) * 3 for _ in range(k))
+    centroids = tuple(data[random.randint(0, n)] + (random.uniform(0.0, 1.0), ) * dims for _ in range(k))
 
     for i in range(MAX_ITERATIONS):
         new_clusters, centroids = perform_kmeans_iteration(data, centroids)
@@ -48,6 +48,10 @@ def perform_kmeans_clustering(data, k):
         if new_clusters == clusters:
             print("K-Means clustering converged after {} iterations".format(i))
             return clusters
+
+        if VISUALISE_CLUSTER_CHANGES and dims == 2:
+            plot.plot_data_grouped(data, [1 if x != y else 0 for (x, y) in zip(clusters, new_clusters)])
+            plot.show_plot()
 
         clusters = new_clusters
 
@@ -74,6 +78,10 @@ def perform_kmeans_iteration(data, centroids):
 
 # Force-stop in case of no convergence
 MAX_ITERATIONS = 10_000
+
+
+# Visualisation option to show the points changing cluster assignment each iteration
+VISUALISE_CLUSTER_CHANGES = False
 
 
 # Vector operations
