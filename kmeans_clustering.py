@@ -50,7 +50,7 @@ def perform_kmeans_clustering(data, k):
             return clusters
 
         if VISUALISE_CLUSTER_CHANGES and dims == 2:
-            plot.plot_data_grouped(data, [1 if x != y else 0 for (x, y) in zip(clusters, new_clusters)])
+            plot.plot_data_grouped(data + centroids, [1 if x != y else 0 for (x, y) in zip(clusters, new_clusters)] + [2] * k)
             plot.show_plot()
 
         clusters = new_clusters
@@ -81,7 +81,7 @@ MAX_ITERATIONS = 10_000
 
 
 # Visualisation option to show the points changing cluster assignment each iteration
-VISUALISE_CLUSTER_CHANGES = False
+VISUALISE_CLUSTER_CHANGES = True
 
 
 # Vector operations
