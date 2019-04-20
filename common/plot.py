@@ -6,6 +6,11 @@ def plot_data(data: List[Tuple[float, float]]):
     plt.plot([x for (x, _) in data], [y for (_, y) in data], 'o')
 
 
+def plot_data_grouped(data: List[Tuple[float, float]], groups: List[int]):
+    for ((x, y), group) in zip(data, groups):
+        plt.scatter(x, y, c=COLOUR_MAP[group % len(COLOUR_MAP)])
+
+
 def plot_line(x: List[float], y: List[float]):
     plt.plot(x, y, lw=2)
 
@@ -20,3 +25,6 @@ def plot_fn(fn, x: List[float]):
 
 def show_plot():
     plt.show()
+
+
+COLOUR_MAP = ['b', 'g', 'r', 'c', 'm', 'y', 'k']
