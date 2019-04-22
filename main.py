@@ -1,6 +1,7 @@
 import sys
 import gradient_descent
 import kmeans_clustering
+import naive_bayes
 import iris_classifier
 
 
@@ -11,6 +12,9 @@ def content():
 
         # K-Means clustering of arbitrarily-dimensioned datasets
         ('kmeans-clustering', kmeans_clustering.run_kmeans_clustering),
+
+        # Naive-Bayes Gaussian classification
+        ('naive-bayes', naive_bayes.run_naive_bayes),
 
         # Supervised learning models applied to iris classification dataset
         ('iris-classification', iris_classifier.iris_classification)
