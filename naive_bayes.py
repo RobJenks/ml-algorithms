@@ -7,7 +7,16 @@ from common import io
 
 
 def run_naive_bayes():
-    data = load_data("data/pima-indians-diabetes-dataset.csv")
+    datasets = [("Diabetes classification", "data/pima-indians-diabetes-dataset.csv"),
+                ("Iris classification", "data/iris.csv")]
+
+    for dataset, path in datasets:
+        print("\n> Executing naive Bayes for \"{}\" dataset".format(dataset))
+        run_for_dataset(path)
+
+
+def run_for_dataset(path):
+    data = load_data(path)
 
     train, test = generate_datasets(data, 0.67)
     print("Creating training ({} records) and test ({} records) datasets".format(len(train), len(test)))
@@ -22,9 +31,8 @@ def run_naive_bayes():
     print("Prediction accuracy on test dataset: {}".format(calculate_accuracy(test, test_predictions)))
 
 
-
 def load_data(path):
-    return [[float(x) for x in line.split(',')]
+    return [[try_numeric(x) for x in line.split(',')]
             for line in io.read_file(path).splitlines(False)[1:]]
 
 
@@ -46,8 +54,7 @@ def generate_model(dataset) -> Dict:
 
 
 def calculate_stats(dataset):
-    stats = [(mean(feature), stdev(feature)) for feature in zip(*dataset)]
-    del stats[-1]   # No calculation over class labels
+    stats = [(mean(feature), stdev(feature)) for feature in zip(*[x[0:-1] for x in dataset])]
 
     return stats
 
@@ -97,3 +104,10 @@ def predict_dataset(model: Dict, dataset):
 # Calculate the model prediction accuracy against pre-labelled data
 def calculate_accuracy(dataset, predictions):
     return sum(pred == data[-1] for (data, pred) in zip(dataset, predictions)) / len(dataset)
+
+
+def try_numeric(s):
+    try:
+        return float(s)
+    except ValueError:
+        return s
